@@ -5,6 +5,7 @@ let gameResult = "";
 
 playGame = (player, computer) => {
     roundResult = playRound(player, computer);
+    updateChoice(player, computer)
     printResults();
     if (playerScore === 5 || computerScore === 5){
         if (playerScore === 5){
@@ -18,6 +19,7 @@ playGame = (player, computer) => {
         toggleModal();
         resetGame();
         printResults();
+        updateChoice('?', '?')
     }
 
 }
@@ -50,8 +52,6 @@ const rpsBtns = document.querySelectorAll(".options button")
 
 rpsBtns.forEach(btn => btn.addEventListener('click', function (e) {
     playGame(e.target.id, getComputerChoice());
-
-
 }))
 
 function getComputerChoice(){
@@ -69,7 +69,12 @@ function printResults() {
     domComputerScore.textContent = `Computer: ${computerScore}`;
 }
 
-
+playerPickedElement = document.querySelector(".userPicked");
+computerPickedElement = document.querySelector(".computerPicked");
+function updateChoice(playerChoice, computerChoice) {
+    playerPickedElement.textContent = `${playerChoice.toUpperCase()}`
+    computerPickedElement.textContent = `${computerChoice.toUpperCase()}`
+}
 
 //modal
 const modal = document.querySelector(".modal");
